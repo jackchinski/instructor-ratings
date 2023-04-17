@@ -1,0 +1,61 @@
+---
+title: "Teacher Beauty Affects Their Ratings More Than We Think"
+author: "Marcin Jaczynski"
+thanks: "Code and data are available at: __repo link HERE___"
+date: "`r Sys.time()`"
+date-format: "D MMMM YYYY"
+abstract: "At the end of each semesster of school, students are able to rate their professors and teachers through course evaluations. There are two schools of thought for course evaluations: they are repersentative of how well the teacher was able to teach a course, and if the students liked them or they are meaningless as only students who received a bad grade fill out the course evaluations and they are not representative of the teachers ability to teach. However, there are many factors that influece a teacher's rating. In this paper I observe how the beauty has a direct impact on their overall evaluations and see how other factors also play a role in the rating outcome."
+format: pdf
+bibliography: references.bib
+---
+
+# 1 Introduction
+
+Teacher ratings have a direct impact on the validity of a teacher or professor. While there are a lot of factors that play on how students will perceive a teacher and what kind of rating they will give them at the end of the semester, one that is not taken into consideration many times is how beautiful they are. This paper seeks to examine what the trends in instructor evaluations are from the students at the University of Texas during the years 2000-2002. Among beauty, things such as age, gender, department, tenure, and how many students they were teaching are going to be taken into account and evaluated. Based on the observations from the 463 instructors, there is a correlation between the beauty of the instructor and the evaluation they have received. 
+
+
+# 2 Data
+
+```{r}
+#| echo: false
+#| message: false
+data("TeachingRatings", package = "AER")
+
+## evaluation score vs. beauty
+plot(eval ~ beauty, data = TeachingRatings)
+fm <- lm(eval ~ beauty, data = TeachingRatings)
+abline(fm)
+
+```
+
+
+# 2.1 Tools Used
+
+
+# 2.2 Survey Methodology
+
+
+# 2.3 Survey Biases and Ethics
+
+
+# 2.4 Data Collection
+
+
+# 2.5 Data Cleaning
+
+
+## 3 Results
+
+
+## 4 Discussion
+
+
+## 4.1 Limitations
+
+
+# 5 Appendix
+
+
+
+
+
