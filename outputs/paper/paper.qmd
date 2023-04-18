@@ -26,7 +26,45 @@ plot(eval ~ beauty, data = TeachingRatings)
 fm <- lm(eval ~ beauty, data = TeachingRatings)
 abline(fm)
 
+# could try to do something with like male vs female evaluation and also  eval 
+
+# minority vs non minority and their average eval 
+
+#age and evaluation 
+
+# native vs non native and eval 
 ```
+
+```{r}
+#| echo: false
+#| message: false
+library(dplyr)
+library(ggplot2)
+
+# male vs female evaluation 
+males <- subset(TeachingRatings, gender == "male") |> select(eval, beauty, gender)
+average_male_eval <- mean(males$eval)
+average_male_beauty <- mean(males$beauty)
+
+plot(eval ~ beauty, data = males)
+
+females <- subset(TeachingRatings, gender == "female") |> select(eval, beauty, gender)
+average_female_eval <- mean(females$eval)
+average_female_beauty <- mean(females$beauty)
+plot(eval ~ beauty, data = females)
+
+# would be cool to do like a male vs females like two lines on one graph and they like show beauty vs. eval
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+# age vs evaluation 
+age_vs_eval_beauty <- select(age, beauty, eval)
+```
+
+
 
 
 # 2.1 Tools Used

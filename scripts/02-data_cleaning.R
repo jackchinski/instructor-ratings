@@ -10,17 +10,15 @@
 
 #### Workspace setup ####
 library(tidyverse)
+raw_data <- read_csv("inputs/data/raw_data.csv")
 # [...UPDATE THIS...]
 
 #### Clean data ####
 # [...UPDATE THIS...]
-raw_data <- read_csv("inputs/data/raw_data.csv")
-
-
+cleaned_data <- na.omit(raw_data)
+cleaned_data <- subset(cleaned_data, select = -c(...1, prof))
 
 
 #### Save data ####
-# [...UPDATE THIS...]
-# change cleaned_data to whatever name you end up with at the end of cleaning
-write_csv(cleaned_data, "outputs/data/cleaned_data.csv")
+write_csv(cleaned_data, "inputs/data/cleaned_data.csv")
 

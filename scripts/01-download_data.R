@@ -4,8 +4,8 @@
 # Data: 11 February 2023 [...UPDATE THIS...]
 # Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: install the AER package 
+# Any other information needed? 
 
 
 #### Workspace setup ####
@@ -14,7 +14,9 @@ library(tidyverse)
 # [...UPDATE THIS...]
 
 #### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
+data("TeachingRatings", package = "AER")
+
+write.csv(TeachingRatings, file = "raw_data.csv")
 
 
 
