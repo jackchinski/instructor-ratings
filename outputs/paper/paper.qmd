@@ -46,7 +46,7 @@ Each entry in the following data set contains the following details:
 
 
 # 2.3 Data Analysis 
-The data set from AER was gathered by installing the AER package [source AER] in the RStudio [source R studio] console, and then the package contents were extracted to only include the TeachingRatings data set in the "download_data" file under "/scripts". The data was then analyzed using the R programming language [@rcoreteam2022]. Additonally, the programming packages dplyr [source dplyr] as well as ggplot2 [source ggplot2], were used to analyze the data, and create the graphs. 
+The data set from AER was gathered by installing the AER package [source AER] in the RStudio [source R studio] console, and then the package contents were extracted to only include the TeachingRatings data set in the "download_data" file under "/scripts". The data was then analyzed using the R programming language [@rcoreteam2022]. Additionally, the programming packages dplyr [source dplyr] as well as ggplot2 [source ggplot2], were used to analyze the data, and create the graphs. 
 
 
 # 2.4 Advantages and Disadvantages
