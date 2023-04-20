@@ -78,7 +78,7 @@ fm_males <- lm(eval ~ beauty, data = males)
 abline(fm_males)
 ```
 
-The next figure @fig-females-beauty-eval explores the correlation between the beauty and evaluation of female instructors. The figure conforms to my hypothesis, as for every additional point in beauty ratings the instructor should gain an extra 0.08762 evaluation points.
+The next @fig-females-beauty-eval explores the correlation between the beauty and evaluation of female instructors. The figure conforms to my hypothesis, as for every additional point in beauty ratings the instructor should gain an extra 0.08762 evaluation points.
 
 ```{r}
 #| echo: false
@@ -93,7 +93,7 @@ abline(fm_females)
 
 ```
 
-Figure @fig-females-beauty-eval-with-males-abline shows the graph of the beauty and evaluation correlation for female instructors with the line of best fit for the male instructors. According to the models, for men the beauty affects their evaluations more than the female instructors. 
+@fig-females-beauty-eval-with-males-abline shows the graph of the beauty and evaluation correlation for female instructors with the line of best fit for the male instructors. According to the models, for men the beauty affects their evaluations more than the female instructors. 
 ```{r}
 #| echo: false
 #| message: false
@@ -108,17 +108,9 @@ legend("bottomright", legend = c("Males", "Females"), col = c("blue", "red"), lw
 
 
 
-
-
-
-Table @table-avg-male-and-female-beauty-and-eval shows the average beauty and evaluation rating for both males and females. After seeing the results of the male instructors having their evaluation be affected more by their beauty, I wanted to see what the average rating for both males and females were. According to the data, male instructors have a lower average beauty rating than female instructors, yet males are on average more highly rated. After seeing the following results, I decided to take on another route to figure out what impacted the instructors evaluation the most. 
 ```{r}
 #| echo: false
 #| message: false
-#| label: table-avg-male-and-female-beauty-and-eval
-#| tbl-cap: [DON'T FORGET]
-
-library(flextable)
 
 
 # average female stats 
@@ -128,61 +120,72 @@ average_female_beauty <- mean(females$beauty)
 # average male stats
 average_male_eval <- mean(males$eval)
 average_male_beauty <- mean(males$beauty)
+```
 
+@tbl-avgmaleandfemalebeautyandeval shows the average beauty and evaluation rating for both males and females. After seeing the results of the male instructors having their evaluation be affected more by their beauty, I wanted to see what the average rating for both males and females were. According to the data, male instructors have a lower average beauty rating than female instructors, yet males are on average more highly rated. After seeing the following results, I decided to take on another route to figure out what impacted the instructors evaluation the most.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-avgmaleandfemalebeautyandeval
+#| tbl-cap: The average bveauty and ealuation for males and females. 
+
+library(flextable)
 df <- data.frame( Gender = c("Male", "Female"), Beauty = c(average_male_beauty, average_female_beauty), Eval = c(average_male_eval, average_female_eval))
 
-table <- flextable(df) 
+table <- flextable(df) |> autofit()
 set_caption(table, caption = "Average Male and Female Beauty and Evaluations")
 ```
 
 
-According to @figure-overall-beauty-and-eval there is a correlation between the beauty of the instructor and their evaluation. However, what had the biggest impact? The slope of the line for both male and female instructors is 0.133, meaning that every increase in beauty should yield an evaluation higher by 0.133. Additionally the r^2 value is 0.03364 or 3% , indicating that evaluation can be explained by the variability in beauty, which is the variability of y that is explained by the x. The r^2 indicates how much it affects the evaluation.  
+
+According to @fig-overall-beauty-and-eval there is a correlation between the beauty of the instructor and their evaluation. However, what had the biggest impact? The slope of the line for both male and female instructors is 0.133, meaning that every increase in beauty should yield an evaluation higher by 0.133. Additionally the r^2 value is 0.03364 or 3% , indicating that evaluation can be explained by the variability in beauty, which is the variability of y that is explained by the x. The r^2 indicates how much it affects the evaluation.  
 
 ```{r}
 #| echo: false
 #| message: false
-#| label: figure-overall-beauty-and-eval
-#| fig-cap: [DON'T FORGET]
+#| label: fig-overall-beauty-and-eval
+#| fig-cap: Overall correlation betwen beauty and evaluation for all instructors, in green is the line of best fit 
 data("TeachingRatings", package = "AER")
 
 ## evaluation score vs. beauty
-plot(eval ~ beauty, data = TeachingRatings)
+plot(eval ~ beauty, data = TeachingRatings, main = "Beauty and Evaluation For All Instructors ", xlab = "Beauty", ylab = "Evaluation")
 fm <- lm(eval ~ beauty, data = TeachingRatings)
-abline(fm)
+abline(fm, col = "green")
 
 
 ```
 
-The table @coefficients-affecting-eval shows off all of the coefficients and how they respectively affect the evaluation of the instructor. The p-value is the indicator of how likely something is due to pure randomness, and so a low p-value means that something is very unlikely to be due to pure chance. For all of the variables that affect the instructors evaluation, the p-value is 7.822e-15, which is really small. This indicates that the variables present do in fact affect the evaluation of an instructor, and there is a small chance that it is due to randomness. The estimate shows how much each variable is able to affect the evaluation of an instructor as it increases. The p-value for each again indicates how likely it is that each variable could be affecting the evaluation due to pure chance. Based on the data I use the 95% rule to say that there is less than 5% that the strong affecting variables are not due to chance and they have a great impact, these include: minority, gender, credits, beauty, native, students, allstudents. 
-```{r}
-#| echo: false
- #| message: false
- #| label: coefficients-affecting-eval
- #| tbl-cap: [DON'T FORGET]
- # linear regression full model (uses all variables at the disposable)
- df_predictions = subset(cleaned_data)
-
- predictions = lm(eval ~ ., data = df_predictions)
- 
- summary_table <- summary(predictions)
- coefficients <- summary_table$coefficients[, 1:2]
- coefficient_table <- data.frame(
-   Coefficient = row.names(coefficients),
-   Estimate = coefficients[, 1],
-   StandardError = coefficients[, 2]
- )
- 
- colnames(coefficient_table) <- c("Coefficient", "Estimate", "Standard Error")
- flextable(coefficient_table)
-
-```
-
-Table @strong-coefficients-affecting-eval shows all of the variables that affect an instructor's evaluation the most. The estimate is how much the evaluation is how much the evaluation will either increase or decrease based on the change in the variable, and the p-value is how likely it is to be due to randomness. 
+@tbl-coefficients-affecting-eval shows off all of the coefficients and how they respectively affect the evaluation of the instructor. The p-value is the indicator of how likely something is due to pure randomness, and so a low p-value means that something is very unlikely to be due to pure chance. For all of the variables that affect the instructors evaluation, the p-value is 7.822e-15, which is really small. This indicates that the variables present do in fact affect the evaluation of an instructor, and there is a small chance that it is due to randomness. The estimate shows how much each variable is able to affect the evaluation of an instructor as it increases. The p-value for each again indicates how likely it is that each variable could be affecting the evaluation due to pure chance. Based on the data I use the 95% rule to say that there is less than 5% that the strong affecting variables are not due to chance and they have a great impact, these include: minority, gender, credits, beauty, native, students, allstudents. 
 ```{r}
 #| echo: false
 #| message: false
-#| label: strong-coefficients-affecting-eval
-#| tbl-cap: [DON'T FORGET]
+#| label: tbl-coefficients-affecting-eval
+#| tbl-cap: All of the varaibles which affect evaluation, estimate tells us how much evaluation will rise as does the variable, standard error describes how likely it is that the variable affects the evaluation due to chance.
+# linear regression full model (uses all variables at the disposable)
+df_predictions = subset(cleaned_data)
+
+predictions = lm(eval ~ ., data = df_predictions)
+
+summary_table <- summary(predictions)
+coefficients <- summary_table$coefficients[, 1:2]
+coefficient_table <- data.frame(
+ Coefficient = row.names(coefficients),
+ Estimate = coefficients[, 1],
+ StandardError = coefficients[, 2]
+)
+
+colnames(coefficient_table) <- c("Coefficient", "Estimate", "Standard Error")
+flextable(coefficient_table) |> autofit()
+
+```
+
+@tbl-strong-coefficients-affecting-eval shows all of the variables that affect an instructor's evaluation the most. The estimate is how much the evaluation is how much the evaluation will either increase or decrease based on the change in the variable, and the p-value is how likely it is to be due to randomness. 
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-strong-coefficients-affecting-eval
+#| tbl-cap: Strong coeffcients affecting the evalution of instructors
 # linear regression using only the statistically significant predictors/variables
 
 significant_preds <- lm(eval ~ minority + gender + credits + beauty + native + 
@@ -198,14 +201,14 @@ coefficient_table2 <- data.frame(
 
 colnames(coefficient_table2) <- c("Coefficient", "Estimate", "Standard Error")
 
-flextable(coefficient_table2)
+flextable(coefficient_table2) |> autofit()
 
 ```
 
 
 ## 4 Discussion
 
-#4.1 Beauty and Evaluation 
+# 4.1 Beauty and Evaluation 
 After reviewing all of the data, my initial hypothesis that beauty does influence an instructor's evaluation stands true, as the data shows that for each unit increase in beauty should result in a corresponding increase in evaluation score of 0.16. However, other factors also play a significant factor to the instructors evaluation. 
 
 # 4.2 Male and Female Instructors 
@@ -220,16 +223,13 @@ Instructors who are minorities are seen to receive lower evaluations than those 
 Based on the data, instructors who are native receive lower evaluations than those who are not. The coefficient estimate for "nativeyes" is 0.259451, meaning that being a native instructor would increase the evaluation score by 0.259451 units, as compared to those who are non native.  This effect has a significant effect on the evaluation of the instructors with a p-value of 0.013446. However, according to the data, non-native instructors actually receive higher evaluations than their native counterparts. This seems counter intuitive that while the estimate is positive, they receive lower evaluations, however, the estimate is holding all other variables constant which means that the estimate is the difference in the evaluation is everything else about two instructors remains identical. As such, though the estimate is positive, the actual data shows that the native instructors actually receive lower evaluations that the non-native instructors. 
 
 
-## 4.1 Limitations
+## 5 Limitations
 There are several limitations to consider from the following study. Firstly the study was conducted at one university, and therefore cannot be a generalization of other universities or students. Additionally, the study is relatively, old given by the fact that it was conducted in the years 2000-20002, and cannot reflect the changes in student demographics, teaching methodologies, and evaluation practices since then. Additionally, the method of data collection is unknown, therefore the reliability of the data is unknown. Moreover, the grading scale which was used in the study ranges from -2.0 to 2.0 for measuring beauty, which could potentially be unfamiliar to some and cause invalid ratings. The measure of beauty in the study is also based on personal preference of the students which were assessing the instructors beauty, which cannot be a unified measurement, and would vary depending on which students were chosen to evaluate the instructors beauty. This could potentially introduce variability and bias in the study. 
 
 Going back to the results of the native instructors versus the non-native ones. While the "native-yes" estimate is positive, indicating that native instructors should receive a higher evaluation, the actual data shows they receive a lower one. This means there could be some hidden variables which have not been accounted for such as the instructors language proficiency, that may also affect the students evaluation of their instructors.  
 
 Lastly, the study lacks information about the students themselves which carried out the evaluations. Cross referencing instructor evaluations to student data such as their age, gender, academic performance could have significant impact on the instructor. For example female students could find a male instructor highly attractive, but if only 6 male students were chosen to evaluate their beauty, then the data could be skewed. Additionally, students which do well in a course are more likely to review their instructor positively, while those who performed poorly tend to leave more negative evaluations. Leaving an abnormally negative score, could lead to the results being inaccurate, and without said information it is hard to understand the factors which influence an instructor's evaluation. 
 
-## Next Steps 
-- would want to change the study collection 
-- 
 
 
 
