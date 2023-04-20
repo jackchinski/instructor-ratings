@@ -46,7 +46,7 @@ Each entry in the following data set contains the following details:
 
 
 # 2.3 Data Analysis 
-The data set from AER was gathered by installing the AER package [source AER] in the RStudio [source R studio] console, and then the package contents were extracted to only include the TeachingRatings data set in the "download_data" file under "/scripts". The data was then analyzed using the R programming language [@rcoreteam2022]. Additionally, the programming packages dplyr [source dplyr] as well as ggplot2 [source ggplot2], were used to analyze the data, and create the graphs. 
+The data set from AER was gathered by installing the AER package [@AER] in the RStudio [@rstudio] console, and then the package contents were extracted to only include the TeachingRatings data set in the "download_data" file under "/scripts". The data was then analyzed using the R programming language [@rcoreteam2022]. Additionally, the programming packages dplyr [@wickham2023] as well as tidyverse [@wickham2019], and [@testthat] were used to analyze the data, test and create graphs. 
 
 
 # 2.4 Advantages and Disadvantages
@@ -58,23 +58,23 @@ The following data set has both some advantages and disadvantages. In terms of a
 ## 3 Results
 # 3.1 Male vs. Female 
 
-The first area I explored, while trying to find what affected an instructors evaluation is the gender of the instructor. According to my initial hypothesis, if one gender scored a higher in beauty metrics , then they would also score higher in terms of evaluation. As such, I decided to create two seperate graphs in order to show the correlation between beauty and evaluation for both genders. @fig-males-beauty-eval shows the beauty and evaluation scores for all male instructors, and, the results show that for male instructs for every additional point of beauty rating, we would expect the evaluation to increase by 0.20027. 
+The first area I explored, while trying to find what affected an instructors evaluation is the gender of the instructor. According to my initial hypothesis, if one gender scored a higher in beauty metrics , then they would also score higher in terms of evaluation. As such, I decided to create two seperate graphs in order to show the correlation between beauty and evaluation for both genders. @fig-males-beauty-eval shows the beauty and evaluation scores for all male instructors, and, the results show that for male instructs for every additional point of beauty rating, we would expect the evaluation to increase by c 
 
 ```{r}
 #| echo: false
 #| message: false
 #| label: fig-males-beauty-eval
-#| fig-cap: [DON'T FORGET..]
+#| fig-cap: Beaty and Evaluation scores that increase for male instructors by 0.20027.
 library(dplyr)
 library(ggplot2)
 
 TeachingRatings <- read.csv("../../inputs/data/cleaned_data.csv")
+cleaned_data <-read.csv("../../inputs/data/cleaned_data.csv")
 
 # males graph of beauty and evaluation 
 males <- subset(TeachingRatings, gender == "male") |> select(eval, beauty, gender)
 plot(eval ~ beauty, data = males, ylim = c(2.0, 5.0), xlim = c(-1.5, 2.0), col = "blue", main = "Beauty and Evaluation for Males", xlab = "Beauty", ylab = "Evaluation")
 fm_males <- lm(eval ~ beauty, data = males)
-summary(fm_males)
 abline(fm_males)
 ```
 
@@ -84,14 +84,13 @@ The next figure @fig-females-beauty-eval explores the correlation between the be
 #| echo: false
 #| message: false
 #| label: fig-females-beauty-eval
-#| fig-cap: [DON'T FORGET..]
+#| fig-cap: Beaty and Evaluation scores that increase for female instructors by 0.08762.
 # females graph of beauty and evaluation 
 females <- subset(TeachingRatings, gender == "female") |> select(eval, beauty, gender)
 plot(eval ~ beauty, data = females, ylim = c(2.0, 5.0), xlim = c(-1.5, 2.0), col = "red", main = "Beauty and Evaluation For Females", xlab = "Beauty", ylab = "Evaluation")
 fm_females <- lm(eval ~ beauty, data = females)
 abline(fm_females)
 
-summary(fm_females)
 ```
 
 Figure @fig-females-beauty-eval-with-males-abline shows the graph of the beauty and evaluation correlation for female instructors with the line of best fit for the male instructors. According to the models, for men the beauty affects their evaluations more than the female instructors. 
@@ -99,7 +98,7 @@ Figure @fig-females-beauty-eval-with-males-abline shows the graph of the beauty 
 #| echo: false
 #| message: false
 #| label: fig-females-beauty-eval-with-males-abline
-#| fig-cap: [DON'T FORGET..]
+#| fig-cap: Female instructors beauty and evaluation with the male and female line of best fit 
 # females graph of beauty and evaluation with males abline added 
 plot(eval ~ beauty, data = females, ylim = c(2.0, 5.0), xlim = c(-1.5, 2.0), main = "Beauty and Evaluation For Females With Males Abline", xlab = "Beauty", ylab = "Evaluation")
 abline(fm_females, col = "red")
@@ -107,13 +106,17 @@ abline(fm_males, col = "blue")
 legend("bottomright", legend = c("Males", "Females"), col = c("blue", "red"), lwd = 2)
 ```
 
-Figure @table-avg-male-and-female-beauty-and-eval shows the average beauty and evaluation rating for both males and females. After seeing the results of the male instructors having their evaluation be affected more by their beauty, I wanted to see what the average rating for both males and females were. According to the data, male instructors have a lower average beauty rating than female instructors, yet males are on average more highly rated. After seeing the following results, I decided to take on another route to figure out what impacted the instrucots evaluation the most. 
+
+
+
+
+
+Table @table-avg-male-and-female-beauty-and-eval shows the average beauty and evaluation rating for both males and females. After seeing the results of the male instructors having their evaluation be affected more by their beauty, I wanted to see what the average rating for both males and females were. According to the data, male instructors have a lower average beauty rating than female instructors, yet males are on average more highly rated. After seeing the following results, I decided to take on another route to figure out what impacted the instructors evaluation the most. 
 ```{r}
 #| echo: false
 #| message: false
 #| label: table-avg-male-and-female-beauty-and-eval
 #| tbl-cap: [DON'T FORGET]
-#| fig-cap: [DON'T FORGET..]
 
 library(flextable)
 
@@ -133,13 +136,13 @@ set_caption(table, caption = "Average Male and Female Beauty and Evaluations")
 ```
 
 
-According to @table-overall-beauty-and-eval there is a correlation between the beauty of the instructor and their evaluation. However, what had the biggest impact? The slope of the line for both male and female instructors is 0.133, meaning that every increase in beauty should yield an evaluation higher by 0.133. Additionally the r^2 value is 0.03364 or 3% , indicating that evaluation can be explained by the variability in beauty, which is the variability of y that is explained by the x. The r^2 indicates how much it affects the evaluation.  
+According to @figure-overall-beauty-and-eval there is a correlation between the beauty of the instructor and their evaluation. However, what had the biggest impact? The slope of the line for both male and female instructors is 0.133, meaning that every increase in beauty should yield an evaluation higher by 0.133. Additionally the r^2 value is 0.03364 or 3% , indicating that evaluation can be explained by the variability in beauty, which is the variability of y that is explained by the x. The r^2 indicates how much it affects the evaluation.  
 
 ```{r}
 #| echo: false
 #| message: false
-#| label: table-overall-beauty-and-eval
-#| tbl-cap: [DON'T FORGET]
+#| label: figure-overall-beauty-and-eval
+#| fig-cap: [DON'T FORGET]
 data("TeachingRatings", package = "AER")
 
 ## evaluation score vs. beauty
@@ -147,60 +150,34 @@ plot(eval ~ beauty, data = TeachingRatings)
 fm <- lm(eval ~ beauty, data = TeachingRatings)
 abline(fm)
 
-summary(fm)
-
-# slope of the line for both male and female is 0.13300
-# the amount of changes 
-# additionally the r^2 value is 0.03364 aka 3% , indicating that evaluation can be explained by the variability in beauty  
-# the variability of y that is explained by the x 
-# the r^2 tells you how much it affects the evaluation 
-
-#r2 should not go up but the p-value should go up 
 
 ```
 
 The table @coefficients-affecting-eval shows off all of the coefficients and how they respectively affect the evaluation of the instructor. The p-value is the indicator of how likely something is due to pure randomness, and so a low p-value means that something is very unlikely to be due to pure chance. For all of the variables that affect the instructors evaluation, the p-value is 7.822e-15, which is really small. This indicates that the variables present do in fact affect the evaluation of an instructor, and there is a small chance that it is due to randomness. The estimate shows how much each variable is able to affect the evaluation of an instructor as it increases. The p-value for each again indicates how likely it is that each variable could be affecting the evaluation due to pure chance. Based on the data I use the 95% rule to say that there is less than 5% that the strong affecting variables are not due to chance and they have a great impact, these include: minority, gender, credits, beauty, native, students, allstudents. 
 ```{r}
 #| echo: false
-#| message: false
-#| label: coefficients-affecting-eval
-#| tbl-cap: [DON'T FORGET]
-# linear regression full model (uses all variables at the disposable)
-df_predictions = subset(TeachingRatings)
-predictions = lm(eval ~ ., data = df_predictions)
-summary_table <- summary(predictions)
+ #| message: false
+ #| label: coefficients-affecting-eval
+ #| tbl-cap: [DON'T FORGET]
+ # linear regression full model (uses all variables at the disposable)
+ df_predictions = subset(cleaned_data)
 
-coefficients <- summary_table$coefficients[, 1:2]
-
-coefficient_table <- data.frame(
-  Coefficient = row.names(coefficients),
-  Estimate = coefficients[, 1],
-  StandardError = coefficients[, 2]
-)
-
-colnames(coefficient_table) <- c("Coefficient", "Estimate", "Standard Error")
-
-flextable(coefficient_table)
-summary_table
-
-
-# while looking for what influences the evaluation, this is what I made the table of coefficient and their standard errors 
-# this showed me that the most important things are: blah blah 
-# standard error - graph is more spread meaning 
-
-# estimate - is how much evaluation should go up or down based on the data or effect of each criteria, and the standard error is how sure we are that 
-# the estimate is true 
-
-# so the things I decided to look at more in depth and isolate are : as;lkdjfas;dkljfal;skjdf and then I made their own table of coeficcients and standard errors to remove some of the factors which did not have that big of an influence. 
-
-# the p-vlaue here is (7.822e-15) because this number is low, it means there is at least one thing that is affecting the evaluations. 
-# p value which means that something was due to randomness so if it's small it means it's less likely 
-# 1.96 is the 95% rule, and so anything that is close to 0 has a higher chance of not having an effect on the evaluation and just being a coincidence or a random chance 
-#  
+ predictions = lm(eval ~ ., data = df_predictions)
+ 
+ summary_table <- summary(predictions)
+ coefficients <- summary_table$coefficients[, 1:2]
+ coefficient_table <- data.frame(
+   Coefficient = row.names(coefficients),
+   Estimate = coefficients[, 1],
+   StandardError = coefficients[, 2]
+ )
+ 
+ colnames(coefficient_table) <- c("Coefficient", "Estimate", "Standard Error")
+ flextable(coefficient_table)
 
 ```
 
-Table @strong-coefficients-affecting-eval shows all of the variables that affect an instructor's evaluation the most. The estimate is how much the evaluation is how much the evaluation will either increase or decrease based on the change in the variable, and the standard error is how likely it is to be due to randomness. 
+Table @strong-coefficients-affecting-eval shows all of the variables that affect an instructor's evaluation the most. The estimate is how much the evaluation is how much the evaluation will either increase or decrease based on the change in the variable, and the p-value is how likely it is to be due to randomness. 
 ```{r}
 #| echo: false
 #| message: false
@@ -210,10 +187,7 @@ Table @strong-coefficients-affecting-eval shows all of the variables that affect
 
 significant_preds <- lm(eval ~ minority + gender + credits + beauty + native + 
                           students + allstudents, data = df_predictions)
-summary(significant_preds)
 
-
-#
 coefficients2 <- summary_table$coefficients[, 1:2]
 
 coefficient_table2 <- data.frame(
@@ -225,8 +199,6 @@ coefficient_table2 <- data.frame(
 colnames(coefficient_table2) <- c("Coefficient", "Estimate", "Standard Error")
 
 flextable(coefficient_table2)
-
-# redo what I said up there basically but look at the different values and see how they have changed 
 
 ```
 
