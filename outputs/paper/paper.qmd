@@ -46,7 +46,7 @@ Each entry in the following data set contains the following details:
 
 
 # 2.3 Data Analysis 
-The data set from AER was gathered by installing the AER package [@AER] in the RStudio [@rstudio] console, and then the package contents were extracted to only include the TeachingRatings data set in the "download_data" file under "/scripts". The data was then analyzed using the R programming language [@rcoreteam2022]. Additionally, the programming packages dplyr [@wickham2023] as well as tidyverse [@wickham2019], and [@testthat] were used to analyze the data, test and create graphs. 
+The data set from AER was gathered by installing the AER package [@AER] in the RStudio [@rstudio] console, and then the package contents were extracted to only include the TeachingRatings data set in the "01-download_data.R" file under "/scripts". The data was then analyzed using the R programming language [@rcoreteam2022]. Additionally, the programming packages dplyr [@wickham2023] as well as tidyverse [@wickham2019], and [@testthat] were used to analyze the data, test and create graphs. 
 
 
 # 2.4 Advantages and Disadvantages
@@ -58,7 +58,7 @@ The following data set has both some advantages and disadvantages. In terms of a
 ## 3 Results
 # 3.1 Male vs. Female 
 
-The first area I explored, while trying to find what affected an instructors evaluation is the gender of the instructor. According to my initial hypothesis, if one gender scored a higher in beauty metrics , then they would also score higher in terms of evaluation. As such, I decided to create two seperate graphs in order to show the correlation between beauty and evaluation for both genders. @fig-males-beauty-eval shows the beauty and evaluation scores for all male instructors, and, the results show that for male instructs for every additional point of beauty rating, we would expect the evaluation to increase by c 
+The first area I explored, while trying to find what affected an instructors evaluation is the gender of the instructor. According to my initial hypothesis, if one gender scored a higher in beauty metrics , then they would also score higher in terms of evaluation. As such, I decided to create two seperate graphs in order to show the correlation between beauty and evaluation for both genders. @fig-males-beauty-eval shows the beauty and evaluation scores for all male instructors, and, the results show that for male instructs for every additional point of beauty rating, we would expect the evaluation to increase by 0.20027. 
 
 ```{r}
 #| echo: false
