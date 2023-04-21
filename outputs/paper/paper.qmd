@@ -46,7 +46,7 @@ Each entry in the following data set contains the following details:
 
 
 # 2.3 Data Analysis 
-The data set from AER was gathered by installing the AER package [@AER] in the RStudio [@rstudio] console, and then the package contents were extracted to only include the TeachingRatings data set in the "01-download_data.R" file under "/scripts". The data was then analyzed using the R programming language [@rcoreteam2022]. Additionally, the programming packages dplyr [@wickham2023] as well as tidyverse [@wickham2019], and [@testthat] were used to analyze the data, test and create graphs. 
+The data set from AER was gathered by installing the AER package [@AER] in the RStudio [@rstudio] console, and then the package contents were extracted to only include the TeachingRatings data set in the "01-download_data.R" file under "/scripts". The data was then analyzed using the R programming language [@rcoreteam2022]. Additionally, the programming packages dplyr [@wickham2023] as well as tidyverse [@wickham2019],[@jeppson2021] and [@testthat] were used to analyze the data, test and create graphs. 
 
 
 # 2.4 Advantages and Disadvantages
@@ -72,11 +72,19 @@ TeachingRatings <- read.csv("../../inputs/data/cleaned_data.csv")
 cleaned_data <-read.csv("../../inputs/data/cleaned_data.csv")
 
 # males graph of beauty and evaluation 
-males <- subset(TeachingRatings, gender == "male") |> select(eval, beauty, gender)
-plot(eval ~ beauty, data = males, ylim = c(2.0, 5.0), xlim = c(-1.5, 2.0), col = "blue", main = "Beauty and Evaluation for Males", xlab = "Beauty", ylab = "Evaluation")
-fm_males <- lm(eval ~ beauty, data = males)
-abline(fm_males)
+males <- TeachingRatings %>%
+  filter(gender == "male") %>%
+  select(eval, beauty, gender)
+
+ggplot(males, aes(x = beauty, y = eval)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +
+  xlim(-1.5, 2.0) +
+  ylim(2.0, 5.0) +
+  labs(title = "Beauty and Evaluation for Males",
+       x = "Beauty", y = "Evaluation")
 ```
+
 
 The next @fig-females-beauty-eval explores the correlation between the beauty and evaluation of female instructors. The figure conforms to my hypothesis, as for every additional point in beauty ratings the instructor should gain an extra 0.08762 evaluation points.
 
@@ -86,10 +94,18 @@ The next @fig-females-beauty-eval explores the correlation between the beauty an
 #| label: fig-females-beauty-eval
 #| fig-cap: Beaty and Evaluation scores that increase for female instructors by 0.08762.
 # females graph of beauty and evaluation 
-females <- subset(TeachingRatings, gender == "female") |> select(eval, beauty, gender)
-plot(eval ~ beauty, data = females, ylim = c(2.0, 5.0), xlim = c(-1.5, 2.0), col = "red", main = "Beauty and Evaluation For Females", xlab = "Beauty", ylab = "Evaluation")
-fm_females <- lm(eval ~ beauty, data = females)
-abline(fm_females)
+
+females <- TeachingRatings %>%
+  filter(gender == "female") %>%
+  select(eval, beauty, gender)
+         
+ggplot(females, aes(x = beauty, y = eval)) +
+  geom_point(color = "red") +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +
+  xlim(-1.5, 2.0) +
+  ylim(2.0, 5.0) +
+  labs(title = "Beauty and Evaluation for Females",
+       x = "Beauty", y = "Evaluation")
 
 ```
 
@@ -98,14 +114,33 @@ abline(fm_females)
 #| echo: false
 #| message: false
 #| label: fig-females-beauty-eval-with-males-abline
-#| fig-cap: Female instructors beauty and evaluation with the male and female line of best fit 
+#| fig-cap: Female instructors beauty and evaluation with the male(blue) and female(red) line of best fit 
 # females graph of beauty and evaluation with males abline added 
-plot(eval ~ beauty, data = females, ylim = c(2.0, 5.0), xlim = c(-1.5, 2.0), main = "Beauty and Evaluation For Females With Males Abline", xlab = "Beauty", ylab = "Evaluation")
-abline(fm_females, col = "red")
-abline(fm_males, col = "blue")
-legend("bottomright", legend = c("Males", "Females"), col = c("blue", "red"), lwd = 2)
-```
+males <- subset(TeachingRatings, gender == "male") |> select(eval, beauty, gender)
+fm_males <- lm(eval ~ beauty, data = males)
 
+females <- subset(TeachingRatings, gender == "female") |> select(eval, beauty, gender)
+fm_females <- lm(eval ~ beauty, data = females)
+
+
+
+females <- TeachingRatings %>%
+  filter(gender == "female") %>%
+  select(eval, beauty, gender)
+
+ggplot(females, aes(x = beauty, y = eval, color = gender)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  xlim(-1.5, 2.0) +
+  ylim(2.0, 5.0) +
+  labs(title = "Beauty and Eval for Females With Female And Male Abline",
+       x = "Beauty", y = "Evaluation") +
+  geom_abline(slope = coef(fm_males)[2], intercept = coef(fm_males)[1], color = "blue") +
+  geom_abline(slope = coef(fm_females)[2], intercept = coef(fm_females)[1], color = "red") +
+  scale_color_manual(values = c("red", "red")) +
+  theme(legend.position = "bottomright") +
+  guides(color = guide_legend(title = "Gender")) 
+```
 
 
 ```{r}
@@ -149,12 +184,19 @@ According to @fig-overall-beauty-and-eval there is a correlation between the bea
 data("TeachingRatings", package = "AER")
 
 ## evaluation score vs. beauty
-plot(eval ~ beauty, data = TeachingRatings, main = "Beauty and Evaluation For All Instructors ", xlab = "Beauty", ylab = "Evaluation")
-fm <- lm(eval ~ beauty, data = TeachingRatings)
-abline(fm, col = "green")
+library(ggplot2)
+
+data("TeachingRatings", package = "AER")
+
+ggplot(TeachingRatings, aes(x = beauty, y = eval)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "purple") +
+  labs(title = "Beauty and Evaluation For All Instructors",
+       x = "Beauty", y = "Evaluation")
 
 
 ```
+
 
 @tbl-coefficients-affecting-eval shows off all of the coefficients and how they respectively affect the evaluation of the instructor. The p-value is the indicator of how likely something is due to pure randomness, and so a low p-value means that something is very unlikely to be due to pure chance. For all of the variables that affect the instructors evaluation, the p-value is 7.822e-15, which is really small. This indicates that the variables present do in fact affect the evaluation of an instructor, and there is a small chance that it is due to randomness. The estimate shows how much each variable is able to affect the evaluation of an instructor as it increases. The p-value for each again indicates how likely it is that each variable could be affecting the evaluation due to pure chance. Based on the data I use the 95% rule to say that there is less than 5% that the strong affecting variables are not due to chance and they have a great impact, these include: minority, gender, credits, beauty, native, students, allstudents. 
 ```{r}
@@ -205,6 +247,7 @@ flextable(coefficient_table2) |> autofit()
 
 ```
 
+\pagebreak
 
 ## 4 Discussion
 
