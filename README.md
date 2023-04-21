@@ -2,7 +2,7 @@
 ## Overview
   This paper examines the impact of instructor beauty on course evaluations at the University of Texas between 2000 and 2002, while also considering other factors that may influence ratings. The findings suggest that beauty does have a positive effect on evaluations, as such the use of the instructor evaluations for the use of hiring, firing, and promoting instructors remains controversial. 
   
-  In order to download the data and reproduce the findings in this paper simply install the AER package in the RStudio console using `install.packages("AER")`
+  In order to download the data and reproduce the findings in this paper simply install the AER package in the RStudio console using `install.packages("AER")`. Afterwards you are able to gather the data by using the `data("TeachingRatings", package = "AER")` command in your desired file. 
 
 ## File Structure
 
