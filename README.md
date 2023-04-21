@@ -1,10 +1,8 @@
-# Starter folder
-
+# How Beauty Trumps Performance: AnExamination of Instructor Evaluations at theUniversity of Texas
 ## Overview
-
-This repo provides students with a foundation for their own projects associated with *Telling Stories with Data*. You do not need every aspect for every paper and you should delete aspects that you do not need.
-
-To use this folder, click the green "Code" button", then "Download ZIP". Move the downloaded folder to where you want to work on your own computer, and then modify it to suit.
+  This paper examines the impact of instructor beauty on course evaluations at the University of Texas between 2000 and 2002, while also considering other factors that may influence ratings. The findings suggest that beauty does have a positive effect on evaluations, as such the use of the instructor evaluations for the use of hiring, firing, and promoting instructors remains controversial. 
+  
+  In order to download the data and reproduce the findings in this paper simply install the AER package in the RStudio console using `install.packages("AER")`
 
 ## File Structure
 

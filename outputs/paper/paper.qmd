@@ -222,7 +222,6 @@ Instructors who are minorities are seen to receive lower evaluations than those 
 # 4.5 Native 
 Based on the data, instructors who are native receive lower evaluations than those who are not. The coefficient estimate for "nativeyes" is 0.259451, meaning that being a native instructor would increase the evaluation score by 0.259451 units, as compared to those who are non native.  This effect has a significant effect on the evaluation of the instructors with a p-value of 0.013446. However, according to the data, non-native instructors actually receive higher evaluations than their native counterparts. This seems counter intuitive that while the estimate is positive, they receive lower evaluations, however, the estimate is holding all other variables constant which means that the estimate is the difference in the evaluation is everything else about two instructors remains identical. As such, though the estimate is positive, the actual data shows that the native instructors actually receive lower evaluations that the non-native instructors. 
 
-
 ## 5 Limitations
 There are several limitations to consider from the following study. Firstly the study was conducted at one university, and therefore cannot be a generalization of other universities or students. Additionally, the study is relatively, old given by the fact that it was conducted in the years 2000-20002, and cannot reflect the changes in student demographics, teaching methodologies, and evaluation practices since then. Additionally, the method of data collection is unknown, therefore the reliability of the data is unknown. Moreover, the grading scale which was used in the study ranges from -2.0 to 2.0 for measuring beauty, which could potentially be unfamiliar to some and cause invalid ratings. The measure of beauty in the study is also based on personal preference of the students which were assessing the instructors beauty, which cannot be a unified measurement, and would vary depending on which students were chosen to evaluate the instructors beauty. This could potentially introduce variability and bias in the study. 
 
@@ -230,7 +229,7 @@ Going back to the results of the native instructors versus the non-native ones. 
 
 Lastly, the study lacks information about the students themselves which carried out the evaluations. Cross referencing instructor evaluations to student data such as their age, gender, academic performance could have significant impact on the instructor. For example female students could find a male instructor highly attractive, but if only 6 male students were chosen to evaluate their beauty, then the data could be skewed. Additionally, students which do well in a course are more likely to review their instructor positively, while those who performed poorly tend to leave more negative evaluations. Leaving an abnormally negative score, could lead to the results being inaccurate, and without said information it is hard to understand the factors which influence an instructor's evaluation. 
 
-
+\pagebreak
 
 
 
