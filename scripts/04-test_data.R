@@ -1,11 +1,11 @@
 #### Preamble ####
-# Purpose: Tests... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Data: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Tests data made by the AER of instructor ratings 
+# Author: Marcin Jaczynski 
+# Data: 20 April 2023
+# Contact: marcin.jaczynski@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: install AER package 
+# Any other information needed? - 
 
 
 #### Workspace setup ####
