@@ -30,6 +30,11 @@ test_that("P-value is > 0 ", {
   expect_true(all(summary$coefficient[, 4] > 0))
 })
 
+test_that("Random eval is not zero", {
+  mean_random <- mean(sim_data$random_eval)
+  expect_true(mean_random > 0)
+})
+
 
 
 
